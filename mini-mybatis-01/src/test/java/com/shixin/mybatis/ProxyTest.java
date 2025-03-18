@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ public class ProxyTest {
         UserMapper userMapper = (UserMapper) Proxy.newProxyInstance(this.getClass().getClassLoader(),
                 new Class[]{UserMapper.class}, (proxy, method, args) -> {
                     isProxy.set(true);
-                    System.out.println(method.getName() + " is called with args: " + args);
+                    System.out.println(method.getName() + " is called with args: " + Arrays.toString(args));
                     return proxy;
                 });
         userMapper.deleteUser(1L);
@@ -33,7 +34,7 @@ public class ProxyTest {
             UserDao userDao = (UserDao) Proxy.newProxyInstance(this.getClass().getClassLoader(),
                     new Class[]{UserDao.class}, (proxy, method, args) -> {
                         isProxy.set(true);
-                        System.out.println(method.getName() + " is called with args: " + args);
+                        System.out.println(method.getName() + " is called with args: " + Arrays.toString(args));
                         return proxy;
                     });
             userDao.deleteUser(1L);
