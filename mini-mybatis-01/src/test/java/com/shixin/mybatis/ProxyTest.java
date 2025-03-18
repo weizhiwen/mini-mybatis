@@ -1,5 +1,7 @@
 package com.shixin.mybatis;
 
+import com.shixin.mybatis.mapper.UserDao;
+import com.shixin.mybatis.mapper.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +33,7 @@ public class ProxyTest {
             String result = userDao.deleteUser(1L);
             assertEquals("deleteUser is called with args: [1]", result);
         }, "JDK proxy 只能生成接口的代理对象，不能生成类的代理对象");
-        assertEquals("com.shixin.mybatis.UserDao is not an interface", exception.getMessage());
+        assertEquals("com.shixin.mybatis.mapper.UserDao is not an interface", exception.getMessage());
     }
 
     @Test
@@ -43,7 +45,7 @@ public class ProxyTest {
                 new Class[]{UserMapper.class},
                 userMapperProxy);
         String result = userMapper.deleteUser(1L);
-        assertEquals("代理[com.shixin.mybatis.UserMapper]的[deleteUser]方法成功，参数[[1]]", result);
+        assertEquals("代理[com.shixin.mybatis.mapper.UserMapper]的[deleteUser]方法成功，参数[[1]]", result);
         assertTrue(userMapper.toString().startsWith("com.shixin.mybatis.MapperProxy"));
     }
 }

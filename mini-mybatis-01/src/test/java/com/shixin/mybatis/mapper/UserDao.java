@@ -1,4 +1,4 @@
-package com.shixin.mybatis;
+package com.shixin.mybatis.mapper;
 
 public class UserDao {
     public String deleteUser(Long id) {
